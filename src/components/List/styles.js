@@ -19,7 +19,7 @@ export default StyleSheet.create({
     fontWeight: "bold",
   },
   checkmarkIcon: {
-    //
+    marginRight: 10,
   },
   tasksContainer: {
     paddingTop: 10,
@@ -31,6 +31,7 @@ export default StyleSheet.create({
     fontWeight: "bold",
   },
   taskDescription: {
-    // 
+    fontSize: 16,
+    marginTop: 5,
   },
 });

@@ -1,8 +1,6 @@
-// src/views/ListDetails/ListDetails.js
-
 import React, { useState, useContext } from "react";
 import { View, Text, FlatList, Modal, TextInput, Button } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { BoardsContext } from "../../services/BoardsContext";
 import DetailsToolbar from "../../components/DetailsToolbar";
 import Task from "../../components/Task";

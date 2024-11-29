@@ -2,7 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { BoardsProvider } from '../services/BoardsContext'; // Ensure the path is correct
+import { BoardsProvider } from '../services/BoardsContext'; 
 
 const Stack = createStackNavigator();
 

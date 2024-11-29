@@ -74,7 +74,6 @@ const TaskDetails = ({ route }) => {
     setBoards(updatedBoards);
   };
 
-  // Handler for toggling the task's completion status
   const toggleCompletionStatus = () => {
     const updatedTask = { ...task, isFinished: !isFinished };
     setIsFinished(!isFinished);
