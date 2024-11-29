@@ -1,30 +1,38 @@
-import React, { useState, useEffect, useContext } from "react";
-import { View, FlatList } from "react-native";
+import React, { useState, useContext } from "react";
+import { View, FlatList, Modal, TextInput, Text, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { BoardsContext } from "../../services/BoardsContext";
 import styles from "./styles";
 import Board from "../Board";
-import Toolbar from "../Toolbar";
 import DetailsToolbar from "../DetailsToolbar";
 
 const GalleryList = () => {
   const { boards, setBoards } = useContext(BoardsContext);
-  const [boardName, setBoardName] = useState("");
   const [selectionMode, setSelectionMode] = useState(false);
   const [selectedBoards, setSelectedBoards] = useState([]);
+  const [isAddModalVisible, setAddModalVisible] = useState(false);
+  const [newBoardName, setNewBoardName] = useState('');
   const navigation = useNavigation();
+  const [newThumbnailPhoto, setNewThumbnailPhoto] = useState(null);
 
   const addBoard = () => {
-    if (boardName.trim() !== "") {
+    if (newBoardName.trim() !== "") {
       const newBoard = {
-        id: boards.length > 0 ? boards[boards.length - 1].id + 1 : 1,
-        name: boardName,
+        id: boards.length + 1,
+        name: newBoardName,
         lists: [],
-        thumbnailPhoto: null,
+        thumbnailPhoto: newThumbnailPhoto,
       };
       setBoards([...boards, newBoard]);
-      setBoardName("");
+      setNewBoardName("");
+      setNewThumbnailPhoto(null);
+      setAddModalVisible(false);
     }
+  };
+
+  const handleAdd = () => {
+    setNewBoardName('');
+    setAddModalVisible(true);
   };
 
   const handleBoardLongPress = (id) => {
@@ -63,12 +71,13 @@ const GalleryList = () => {
   return (
     <View style={styles.container}>
       <DetailsToolbar
-        boardName={boardName}
-        setBoardName={setBoardName}
-        onAdd={addBoard}
+        onAdd={handleAdd}
         selectionMode={selectionMode}
         cancelSelectionMode={cancelSelectionMode}
-        deleteSelectedBoards={deleteSelectedBoards}
+        deleteSelectedItems={deleteSelectedBoards}
+        selectedCount={selectedBoards.length}
+        title="Your Boards"
+        showEdit={false}
       />
       <View style={{ flex: 1 }}>
         <FlatList
@@ -86,6 +95,36 @@ const GalleryList = () => {
           )}
         />
       </View>
+
+      {/* Add Modal */}
+      <Modal
+        visible={isAddModalVisible}
+        transparent={true}
+        animationType="slide"
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Add New Board</Text>
+            <TextInput
+              style={styles.input}
+              value={newBoardName}
+              onChangeText={setNewBoardName}
+              placeholder="Board Name"
+            />
+            <TextInput
+              style={styles.input}
+              value={newThumbnailPhoto}
+              onChangeText={setNewThumbnailPhoto}
+              placeholder="Link to Thumbnail Photo"
+            />
+            <Button title="Add" onPress={addBoard} />
+            <Button
+              title="Cancel"
+              onPress={() => setAddModalVisible(false)}
+            />
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };

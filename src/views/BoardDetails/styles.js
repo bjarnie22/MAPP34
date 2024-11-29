@@ -21,4 +21,29 @@ export default StyleSheet.create({
     height: 200,
     margin: 20,
   },
+  modalContainer: {
+  flex: 1,
+  justifyContent: "center",
+  alignItems: "center",
+  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+},
+modalContent: {
+  backgroundColor: "#fff",
+  padding: 20,
+  borderRadius: 10,
+  width: '80%',
+},
+modalTitle: {
+  fontSize: 20,
+  fontWeight: 'bold',
+  marginBottom: 10,
+},
+input: {
+  borderWidth: 1,
+  borderColor: '#ccc',
+  padding: 10,
+  marginBottom: 10,
+  borderRadius: 5,
+},
+
 });

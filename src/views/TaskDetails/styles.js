@@ -1,31 +1,37 @@
-import { StyleSheet } from "react-native";
-import { colors } from "../../styles/colors";
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.postItYellow,
-  },
-  headerContainer: {
-    alignItems: "center",
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: "bold",
-    color: "black",
-    textAlign: "center",
-    marginTop: 20,
+    padding: 16,
   },
   errorText: {
     fontSize: 18,
     color: 'red',
-    textAlign: 'center',
-    marginTop: 20,
   },
-  thumbnail: {
-    width: "80%",
-    height: 200,
-    margin: 20,
+  taskDetailsContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  completionIcon: {
+    marginBottom: 20,
+  },
+  taskName: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  taskNameCompleted: {
+    textDecorationLine: 'line-through',
+    color: '#999',
+  },
+  taskDescription: {
+    fontSize: 18,
+    marginTop: 10,
+  },
+  taskDescriptionCompleted: {
+    textDecorationLine: 'line-through',
+    color: '#999',
   },
   modalContainer: {
     flex: 1,

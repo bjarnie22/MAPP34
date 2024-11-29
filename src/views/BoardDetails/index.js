@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { View, Text, Image, FlatList } from "react-native";
+import { View, Text, Image, FlatList, Modal, TextInput, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { BoardsContext } from "../../services/BoardsContext"; 
 import DetailsToolbar from "../../components/DetailsToolbar";
@@ -12,6 +12,14 @@ const BoardDetails = ({ route }) => {
   const board = boards.find((b) => b.id === boardId);
   const [selectionMode, setSelectionMode] = useState(false);
   const [selectedLists, setSelectedLists] = useState([]);
+
+  const [isEditModalVisible, setEditModalVisible] = useState(false);
+  const [editedName, setEditedName] = useState(board.name);
+  const [editedThumbnail, setEditedThumbnail] = useState(board.thumbnailPhoto);
+
+  const [isAddModalVisible, setAddModalVisible] = useState(false);
+  const [newListName, setNewListName] = useState("");
+  const [newListColor, setNewListColor] = useState("#ffffff");
   const navigation = useNavigation();
 
   if (!board) {
@@ -21,6 +29,47 @@ const BoardDetails = ({ route }) => {
       </View>
     );
   }
+
+  const handleEdit = () => {
+    setEditedName(board.name);
+    setEditedThumbnail(board.thumbnailPhoto);
+    setEditModalVisible(true);
+  };
+
+  const saveEditedBoard = () => {
+    const updatedBoards = boards.map((b) =>
+      b.id === boardId ? { ...b, name: editedName, thumbnailPhoto: editedThumbnail } : b
+    );
+    setBoards(updatedBoards);
+    setEditModalVisible(false);
+  };
+
+  const handleAdd = () => {
+    setAddModalVisible(true);
+  };
+
+  const addList = () => {
+    if (newListName.trim() !== "") {
+      const newList = {
+        id: board.lists.length + 100,
+        name: newListName,
+        color: newListColor,
+        tasks: [],
+      };
+      const updatedLists = [...board.lists, newList];
+      const updatedBoards = boards.map((b) => {
+        if (b.id === boardId) {
+          return { ...b, lists: updatedLists };
+        }
+        return b;
+      });
+      setBoards(updatedBoards);
+      setNewListName("");
+      setNewListColor("#ffffff");
+      setAddModalVisible(false);
+    }
+  };
+
 
   const handleListPress = (list) => {
     if (selectionMode) {
@@ -67,7 +116,10 @@ const BoardDetails = ({ route }) => {
         selectionMode={selectionMode}
         selectedCount={selectedLists.length}
         cancelSelectionMode={cancelSelectionMode}
-        deleteSelectedLists={deleteSelectedLists}
+        deleteSelectedItems={deleteSelectedLists}
+        onEdit={handleEdit}
+        onAdd={handleAdd}
+        title={board.name}
       />
       <View style={styles.container}>
         <FlatList
@@ -75,7 +127,6 @@ const BoardDetails = ({ route }) => {
           keyExtractor={(item) => item.id.toString()}
           ListHeaderComponent={
             <View style={styles.headerContainer}>
-              <Text style={styles.title}>{board.name}</Text>
               <Image
                 source={{ uri: board.thumbnailPhoto }}
                 style={styles.thumbnail}
@@ -93,6 +144,58 @@ const BoardDetails = ({ route }) => {
           )}
         />
       </View>
+      <Modal
+        visible={isEditModalVisible}
+        transparent={true}
+        animationType="slide"
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Edit Board</Text>
+            <TextInput
+              style={styles.input}
+              value={editedName}
+              onChangeText={setEditedName}
+            />
+            <TextInput
+              style={styles.input}
+              value={editedThumbnail}
+              onChangeText={setEditedThumbnail}
+            />
+            <Button title="Save" onPress={saveEditedBoard} />
+            <Button
+              title="Cancel"
+              onPress={() => setEditModalVisible(false)}
+            />
+          </View>
+        </View>
+      </Modal>
+      <Modal
+        visible={isAddModalVisible}
+        transparent={true}
+        animationType="slide"
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Add List</Text>
+            <TextInput
+              style={styles.input}
+              value={newListName}
+              onChangeText={setNewListName}
+            />
+            <TextInput
+              style={styles.input}
+              value={newListColor}
+              onChangeText={setNewListColor}
+            />
+            <Button title="Save" onPress={addList} />
+            <Button
+              title="Cancel"
+              onPress={() => setAddModalVisible(false)}
+            />
+          </View>
+        </View>
+      </Modal>
     </>
   );
 };

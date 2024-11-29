@@ -1,4 +1,3 @@
-// styles.js for DetailsToolbar
 import { StyleSheet } from 'react-native';
 import { colors } from "../../styles/colors";
 
@@ -15,6 +14,7 @@ export default StyleSheet.create({
     flex: 1,
     fontSize: 18,
     color: 'white',
+    textAlign: 'center',
   },
   toolbarAction: {
     flexShrink: 0,
