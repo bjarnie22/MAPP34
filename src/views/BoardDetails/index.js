@@ -1,7 +1,15 @@
 import React, { useState, useContext } from "react";
-import { View, Text, Image, FlatList, Modal, TextInput, Button } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  FlatList,
+  Modal,
+  TextInput,
+  Button,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { BoardsContext } from "../../services/BoardsContext"; 
+import { BoardsContext } from "../../services/BoardsContext";
 import DetailsToolbar from "../../components/DetailsToolbar";
 import List from "../../components/List";
 import styles from "./styles";
@@ -38,7 +46,9 @@ const BoardDetails = ({ route }) => {
 
   const saveEditedBoard = () => {
     const updatedBoards = boards.map((b) =>
-      b.id === boardId ? { ...b, name: editedName, thumbnailPhoto: editedThumbnail } : b
+      b.id === boardId
+        ? { ...b, name: editedName, thumbnailPhoto: editedThumbnail }
+        : b
     );
     setBoards(updatedBoards);
     setEditModalVisible(false);
@@ -70,7 +80,6 @@ const BoardDetails = ({ route }) => {
     }
   };
 
-
   const handleListPress = (list) => {
     if (selectionMode) {
       if (selectedLists.includes(list.id)) {
@@ -79,7 +88,10 @@ const BoardDetails = ({ route }) => {
         setSelectedLists([...selectedLists, list.id]);
       }
     } else {
-      navigation.navigate("List Details", { boardId: board.id, listId: list.id });
+      navigation.navigate("List Details", {
+        boardId: board.id,
+        listId: list.id,
+      });
     }
   };
 
@@ -163,10 +175,7 @@ const BoardDetails = ({ route }) => {
               onChangeText={setEditedThumbnail}
             />
             <Button title="Save" onPress={saveEditedBoard} />
-            <Button
-              title="Cancel"
-              onPress={() => setEditModalVisible(false)}
-            />
+            <Button title="Cancel" onPress={() => setEditModalVisible(false)} />
           </View>
         </View>
       </Modal>
@@ -189,10 +198,7 @@ const BoardDetails = ({ route }) => {
               onChangeText={setNewListColor}
             />
             <Button title="Save" onPress={addList} />
-            <Button
-              title="Cancel"
-              onPress={() => setAddModalVisible(false)}
-            />
+            <Button title="Cancel" onPress={() => setAddModalVisible(false)} />
           </View>
         </View>
       </Modal>

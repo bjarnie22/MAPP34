@@ -1,18 +1,18 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   listContainer: {
     padding: 10,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     marginBottom: 10,
   },
   selectedList: {
-    backgroundColor: '#e0e0e0', 
+    backgroundColor: "#e0e0e0",
   },
   listHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   listTitle: {
     fontSize: 24,

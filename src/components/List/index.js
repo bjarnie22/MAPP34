@@ -1,8 +1,7 @@
 import React from "react";
 import { View, FlatList, Text, TouchableOpacity } from "react-native";
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from "react-native-vector-icons/MaterialIcons";
 import styles from "./styles";
-
 
 const List = ({ list, selectionMode, isSelected, onPress, onLongPress }) => {
   return (
@@ -46,4 +45,3 @@ const List = ({ list, selectionMode, isSelected, onPress, onLongPress }) => {
 };
 
 export default List;
-

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   TextInput,
@@ -8,41 +8,43 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
-} from 'react-native';
-import styles from './styles';
+} from "react-native";
+import styles from "./styles";
 
 const ChatInterface = ({ onClose }) => {
   const [messages, setMessages] = useState([
     {
-      id: 'welcome-1',
-      text: 'Hello! I am your assistant. How can I help you today?',
-      sender: 'bot',
+      id: "welcome-1",
+      text: "Hello! I am your assistant. How can I help you today?",
+      sender: "bot",
     },
   ]);
-  const [inputText, setInputText] = useState('');
+  const [inputText, setInputText] = useState("");
 
   const sendMessage = async () => {
-    if (inputText.trim() === '') return;
+    if (inputText.trim() === "") return;
 
     const userMessage = {
       id: Date.now().toString(),
       text: inputText,
-      sender: 'user',
+      sender: "user",
     };
     setMessages([...messages, userMessage]);
-    setInputText('');
+    setInputText("");
 
     const API_URL =
-      Platform.OS === 'android' ? 'http://10.0.2.2:11434/api/generate' : 'http://localhost:11434/api/generate';
+      Platform.OS === "android"
+        ? "http://10.0.2.2:11434/api/generate"
+        : "http://localhost:11434/api/generate";
 
     try {
       const response = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          model: 'llama3.2:latest',
+          model: "llama3.2:latest",
           prompt: inputText,
-          stream: false, 
+          stream: false,
         }),
       });
 
@@ -54,15 +56,15 @@ const ChatInterface = ({ onClose }) => {
       const botMessage = {
         id: Date.now().toString(),
         text: data.response,
-        sender: 'bot',
+        sender: "bot",
       };
       setMessages((prevMessages) => [...prevMessages, botMessage]);
     } catch (error) {
-      console.error('Fetch error:', error);
+      console.error("Fetch error:", error);
       const errorMessage = {
         id: Date.now().toString(),
-        text: 'Error occurred while fetching the response.',
-        sender: 'bot',
+        text: "Error occurred while fetching the response.",
+        sender: "bot",
       };
       setMessages((prevMessages) => [...prevMessages, errorMessage]);
     }
@@ -72,7 +74,7 @@ const ChatInterface = ({ onClose }) => {
     <View
       style={[
         styles.messageContainer,
-        item.sender === 'user' ? styles.userMessage : styles.botMessage,
+        item.sender === "user" ? styles.userMessage : styles.botMessage,
       ]}
     >
       <Text style={styles.messageText}>{item.text}</Text>
@@ -92,7 +94,7 @@ const ChatInterface = ({ onClose }) => {
         contentContainerStyle={{ paddingBottom: 60 }}
       />
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
         keyboardVerticalOffset={80}
       >
         <View style={styles.inputContainer}>
@@ -108,6 +110,5 @@ const ChatInterface = ({ onClose }) => {
     </View>
   );
 };
-
 
 export default ChatInterface;

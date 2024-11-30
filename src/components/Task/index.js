@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import { CheckBox } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { CheckBox } from "react-native-elements";
+import Icon from "react-native-vector-icons/MaterialIcons";
 import styles from "./styles";
 
-const Task = ({ task, selectionMode, isSelected, onPress, onLongPress, onToggleCheckbox }) => {
+const Task = ({
+  task,
+  selectionMode,
+  isSelected,
+  onPress,
+  onLongPress,
+  onToggleCheckbox,
+}) => {
   const [isFinished, setIsFinished] = useState(task.isFinished);
 
   const toggleCheckbox = () => {
@@ -38,12 +45,7 @@ const Task = ({ task, selectionMode, isSelected, onPress, onLongPress, onToggleC
             checkedColor="#007AFF"
           />
         )}
-        <Text
-          style={[
-            styles.taskName,
-            isFinished && styles.taskNameCompleted,
-          ]}
-        >
+        <Text style={[styles.taskName, isFinished && styles.taskNameCompleted]}>
           {task.name}
         </Text>
       </View>

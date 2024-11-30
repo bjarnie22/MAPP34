@@ -23,7 +23,7 @@ export default StyleSheet.create({
     textAlign: "center",
   },
   selectedBoard: {
-    backgroundColor: colors.selectedBackground, 
+    backgroundColor: colors.selectedBackground,
   },
   selectionOverlay: {
     position: "absolute",
@@ -32,7 +32,7 @@ export default StyleSheet.create({
   },
   checkmark: {
     fontSize: 20,
-    color: colors.checkmarkColor, 
+    color: colors.checkmarkColor,
   },
   uncheckedCircle: {
     width: 20,

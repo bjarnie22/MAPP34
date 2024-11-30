@@ -1,9 +1,16 @@
 import React, { useState, useContext } from "react";
-import { View, Text, Modal, TextInput, Button, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Modal,
+  TextInput,
+  Button,
+  TouchableOpacity,
+} from "react-native";
 import { BoardsContext } from "../../services/BoardsContext";
 import DetailsToolbar from "../../components/DetailsToolbar";
 import styles from "./styles";
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 const TaskDetails = ({ route }) => {
   const { boards, setBoards } = useContext(BoardsContext);
@@ -48,7 +55,11 @@ const TaskDetails = ({ route }) => {
   };
 
   const saveEditedTask = () => {
-    const updatedTask = { ...task, name: editedName, description: editedDescription };
+    const updatedTask = {
+      ...task,
+      name: editedName,
+      description: editedDescription,
+    };
     updateTaskInContext(updatedTask);
     setEditModalVisible(false);
   };
@@ -86,21 +97,31 @@ const TaskDetails = ({ route }) => {
         selectionMode={false}
         onEdit={handleEdit}
         title="Task Details"
-        showAdd={false} 
+        showAdd={false}
       />
       <View style={styles.container}>
         <View style={styles.taskDetailsContainer}>
-          <TouchableOpacity onPress={toggleCompletionStatus} style={styles.completionIcon}>
+          <TouchableOpacity
+            onPress={toggleCompletionStatus}
+            style={styles.completionIcon}
+          >
             <Icon
               name={isFinished ? "check-box" : "check-box-outline-blank"}
               size={30}
               color={isFinished ? "#007AFF" : "#ccc"}
             />
           </TouchableOpacity>
-          <Text style={[styles.taskName, isFinished && styles.taskNameCompleted]}>
+          <Text
+            style={[styles.taskName, isFinished && styles.taskNameCompleted]}
+          >
             {task.name}
           </Text>
-          <Text style={[styles.taskDescription, isFinished && styles.taskDescriptionCompleted]}>
+          <Text
+            style={[
+              styles.taskDescription,
+              isFinished && styles.taskDescriptionCompleted,
+            ]}
+          >
             {task.description}
           </Text>
         </View>
@@ -126,10 +147,7 @@ const TaskDetails = ({ route }) => {
               placeholder="Task Description"
             />
             <Button title="Save" onPress={saveEditedTask} />
-            <Button
-              title="Cancel"
-              onPress={() => setEditModalVisible(false)}
-            />
+            <Button title="Cancel" onPress={() => setEditModalVisible(false)} />
           </View>
         </View>
       </Modal>

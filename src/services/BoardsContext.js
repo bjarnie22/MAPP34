@@ -39,7 +39,7 @@ export const BoardsProvider = ({ children }) => {
     Object.values(listsById).forEach((list) => {
       const board = boardsById[list.boardId];
       if (board) {
-        board.lists.push(list); 
+        board.lists.push(list);
       } else {
         console.warn(
           `Board with id ${list.boardId} not found for list ${list.id}`

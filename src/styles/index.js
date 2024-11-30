@@ -1,25 +1,25 @@
 export const base = {
   headings: {
-    fontFamily: 'sans-serif',
-    fontWeight: 'bold',
+    fontFamily: "sans-serif",
+    fontWeight: "bold",
   },
 };
 
 export const headings = {
   h1: {
     ...base.headings,
-    fontSize: 32, 
+    fontSize: 32,
   },
   h2: {
     ...base.headings,
-    fontSize: 24, 
+    fontSize: 24,
   },
   h3: {
     ...base.headings,
-    fontSize: 18, 
+    fontSize: 18,
   },
   h4: {
     ...base.headings,
-    fontSize: 16, 
+    fontSize: 16,
   },
 };

@@ -1,6 +1,6 @@
-import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import styles from './styles';
+import React from "react";
+import { View, Text, TouchableOpacity } from "react-native";
+import styles from "./styles";
 
 const DetailsToolbar = ({
   selectionMode,
@@ -11,7 +11,7 @@ const DetailsToolbar = ({
   onAdd,
   onMove,
   title,
-  showEdit = true, 
+  showEdit = true,
   showAdd = true,
   showMove = false,
 }) => {
@@ -19,7 +19,10 @@ const DetailsToolbar = ({
     <View style={styles.toolbar}>
       {selectionMode ? (
         <>
-          <TouchableOpacity onPress={cancelSelectionMode} style={styles.toolbarAction}>
+          <TouchableOpacity
+            onPress={cancelSelectionMode}
+            style={styles.toolbarAction}
+          >
             <Text style={styles.toolbarActionText}>Cancel</Text>
           </TouchableOpacity>
           <Text style={styles.toolbarTitle}>{`${selectedCount} Selected`}</Text>
@@ -29,7 +32,10 @@ const DetailsToolbar = ({
                 <Text style={styles.toolbarActionText}>Move</Text>
               </TouchableOpacity>
             )}
-            <TouchableOpacity onPress={deleteSelectedItems} style={styles.toolbarAction}>
+            <TouchableOpacity
+              onPress={deleteSelectedItems}
+              style={styles.toolbarAction}
+            >
               <Text style={styles.toolbarActionText}>Delete</Text>
             </TouchableOpacity>
           </View>
@@ -51,8 +57,6 @@ const DetailsToolbar = ({
       )}
     </View>
   );
-  
-  
 };
 
 export default DetailsToolbar;

@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   container: {
@@ -7,31 +7,31 @@ export default StyleSheet.create({
   },
   errorText: {
     fontSize: 18,
-    color: 'red',
+    color: "red",
   },
   taskDetailsContainer: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   completionIcon: {
     marginBottom: 20,
   },
   taskName: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   taskNameCompleted: {
-    textDecorationLine: 'line-through',
-    color: '#999',
+    textDecorationLine: "line-through",
+    color: "#999",
   },
   taskDescription: {
     fontSize: 18,
     marginTop: 10,
   },
   taskDescriptionCompleted: {
-    textDecorationLine: 'line-through',
-    color: '#999',
+    textDecorationLine: "line-through",
+    color: "#999",
   },
   modalContainer: {
     flex: 1,

@@ -12,5 +12,3 @@ export const colors = {
   checkmarkColor: "#0077A1",
   buttonBackground: "#0288D1",
 };
-
-

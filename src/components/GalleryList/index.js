@@ -11,7 +11,7 @@ const GalleryList = () => {
   const [selectionMode, setSelectionMode] = useState(false);
   const [selectedBoards, setSelectedBoards] = useState([]);
   const [isAddModalVisible, setAddModalVisible] = useState(false);
-  const [newBoardName, setNewBoardName] = useState('');
+  const [newBoardName, setNewBoardName] = useState("");
   const navigation = useNavigation();
   const [newThumbnailPhoto, setNewThumbnailPhoto] = useState(null);
 
@@ -31,7 +31,7 @@ const GalleryList = () => {
   };
 
   const handleAdd = () => {
-    setNewBoardName('');
+    setNewBoardName("");
     setAddModalVisible(true);
   };
 
@@ -116,10 +116,7 @@ const GalleryList = () => {
               placeholder="Link to Thumbnail Photo"
             />
             <Button title="Add" onPress={addBoard} />
-            <Button
-              title="Cancel"
-              onPress={() => setAddModalVisible(false)}
-            />
+            <Button title="Cancel" onPress={() => setAddModalVisible(false)} />
           </View>
         </View>
       </Modal>
