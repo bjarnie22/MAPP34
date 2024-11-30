@@ -18,8 +18,8 @@ export default StyleSheet.create({
   },
   errorText: {
     fontSize: 18,
-    color: 'red',
-    textAlign: 'center',
+    color: "red",
+    textAlign: "center",
     marginTop: 20,
   },
   thumbnail: {
@@ -50,5 +50,36 @@ export default StyleSheet.create({
     padding: 10,
     marginBottom: 10,
     borderRadius: 5,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContent: {
+    backgroundColor: "#fff",
+    padding: 20,
+    borderRadius: 10,
+    width: "80%",
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+  listItem: {
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ccc",
+  },
+  selectedListItem: {
+    backgroundColor: "#e0e0e0",
+  },
+  listItemText: {
+    fontSize: 18,
+  },
+  toolbarActions: {
+    flexDirection: "row",
   },
 });

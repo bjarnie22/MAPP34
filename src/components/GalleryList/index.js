@@ -95,8 +95,6 @@ const GalleryList = () => {
           )}
         />
       </View>
-
-      {/* Add Modal */}
       <Modal
         visible={isAddModalVisible}
         transparent={true}

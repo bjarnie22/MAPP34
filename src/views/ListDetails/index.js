@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { View, Text, FlatList, Modal, TextInput, Button } from "react-native";
+import { View, Text, FlatList, Modal, TextInput, Button , TouchableOpacity} from "react-native";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { BoardsContext } from "../../services/BoardsContext";
 import DetailsToolbar from "../../components/DetailsToolbar";
@@ -39,6 +39,60 @@ const ListDetails = ({ route }) => {
   const [isAddModalVisible, setAddModalVisible] = useState(false);
   const [newTaskName, setNewTaskName] = useState("");
   const [newTaskDescription, setNewTaskDescription] = useState("");
+
+  const [isMoveModalVisible, setMoveModalVisible] = useState(false);
+  const [destinationListId, setDestinationListId] = useState(null);
+
+  const handleMove = () => {
+    setDestinationListId(null);
+    setMoveModalVisible(true);
+  };
+
+  const moveTasks = () => {
+    if (destinationListId && destinationListId !== listId) {
+      const destinationList = board.lists.find(
+        (l) => l.id === destinationListId
+      );
+
+      if (destinationList) {
+        const tasksToMove = list.tasks.filter((task) =>
+          selectedTasks.includes(task.id)
+        );
+
+        const updatedCurrentListTasks = list.tasks.filter(
+          (task) => !selectedTasks.includes(task.id)
+        );
+
+        const updatedDestinationListTasks = [
+          ...destinationList.tasks,
+          ...tasksToMove,
+        ];
+
+        const updatedBoards = boards.map((b) => {
+          if (b.id === boardId) {
+            return {
+              ...b,
+              lists: b.lists.map((l) => {
+                if (l.id === listId) {
+                  return { ...l, tasks: updatedCurrentListTasks };
+                } else if (l.id === destinationListId) {
+                  return { ...l, tasks: updatedDestinationListTasks };
+                } else {
+                  return l;
+                }
+              }),
+            };
+          }
+          return b;
+        });
+
+        setBoards(updatedBoards);
+      }
+    }
+    setSelectionMode(false);
+    setSelectedTasks([]);
+    setMoveModalVisible(false);
+  };
 
   const handleAdd = () => {
     setNewTaskName("");
@@ -179,6 +233,8 @@ const ListDetails = ({ route }) => {
         onEdit={handleEdit}
         onAdd={handleAdd}
         title={list.name}
+        onMove={handleMove}
+        showMove={true}
       />
       <View style={{ flex: 1, backgroundColor: list.color || "#fff" }}>
         <FlatList
@@ -244,6 +300,38 @@ const ListDetails = ({ route }) => {
             />
             <Button title="Add Task" onPress={addTask} />
             <Button title="Cancel" onPress={() => setAddModalVisible(false)} />
+          </View>
+        </View>
+      </Modal>
+      <Modal
+        visible={isMoveModalVisible}
+        transparent={true}
+        animationType="slide"
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Move Tasks To:</Text>
+            <FlatList
+              data={board.lists.filter((l) => l.id !== listId)}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  onPress={() => setDestinationListId(item.id)}
+                  style={[
+                    styles.listItem,
+                    destinationListId === item.id && styles.selectedListItem,
+                  ]}
+                >
+                  <Text style={styles.listItemText}>{item.name}</Text>
+                </TouchableOpacity>
+              )}
+            />
+            <Button
+              title="Move"
+              onPress={moveTasks}
+              disabled={!destinationListId || destinationListId === listId}
+            />
+            <Button title="Cancel" onPress={() => setMoveModalVisible(false)} />
           </View>
         </View>
       </Modal>
